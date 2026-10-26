@@ -15,7 +15,6 @@
   #stage{ position:relative; width:100%; max-width:480px; max-height:100%; aspect-ratio:4/5;
     background:var(--ink); display:flex; flex-direction:column; overflow:hidden; }
   @media (max-aspect-ratio:4/5){ #stage{ height:100%; aspect-ratio:auto; max-width:none; } }
-
   .mono{ font-variant-numeric:tabular-nums; font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace; }
 
   header{ display:flex; align-items:center; gap:8px; padding:9px 12px 8px; border-bottom:1px solid var(--line); }
@@ -26,14 +25,17 @@
     color:var(--fg); background:#0E1218; border:1px solid var(--line); border-radius:999px; padding:3px 9px; }
   .badge.off{ color:var(--dim); }
 
-  #stage .viewwrap{ position:relative; background:#05070A; }
-  #view{ width:100%; display:block; aspect-ratio:352/240; object-fit:cover; }
+  /* the live frame absorbs whatever height is left, cropping instead of overflowing */
+  #stage .viewwrap{ position:relative; background:#05070A; flex:0 1 auto; min-height:0; overflow:hidden;
+    aspect-ratio:352/240; }
+  #view{ width:100%; height:100%; display:block; object-fit:cover; }
 
   .info{ padding:11px 13px 6px; }
   .info h2{ font-size:15.5px; margin:0 0 5px; line-height:1.35; }
   .info .row{ color:var(--dim); font-size:11.5px; letter-spacing:.04em; display:flex; gap:10px; flex-wrap:wrap; }
 
   .thumbs{ display:grid; grid-template-columns:repeat(3,1fr); gap:6px; padding:8px 13px 10px; }
+  @media (max-height:560px){ .thumbs{ display:none; } }
   .thumbs button{ padding:0; border:1px solid var(--line); background:var(--panel); border-radius:7px;
     overflow:hidden; cursor:pointer; color:var(--dim); }
   .thumbs img{ width:100%; display:block; aspect-ratio:352/240; object-fit:cover; }
