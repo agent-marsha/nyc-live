@@ -49,18 +49,37 @@
 
   function restart() { clearInterval(timer); timer = setInterval(tick, RATE); }
 
+  /* a camera that hasn't been on screen recently */
+  function pick(recentIds) {
+    for (let i = 0; i < 40; i++) {
+      const c = all[Math.floor(Math.random() * all.length)];
+      if (!recentIds.includes(c.id)) return c;
+    }
+    return all[0];
+  }
+
+  /* Step prev/next through cameras, generating new ones on the fly so the
+     buttons always move somewhere even with a one-entry queue. */
   function step(d) {
-    if (!queue.length) return;
-    pos = (pos + d + queue.length) % queue.length;
+    if (!all.length) return;
+    const recent = queue.slice(Math.max(0, pos - 4), pos + 5).map(c => c.id);
+    if (d > 0) {
+      if (pos >= queue.length - 1) queue.push(pick(recent));
+      pos++;
+    } else {
+      if (pos === 0) queue.unshift(pick(recent));   // new one lands at index 0
+      else pos--;
+    }
+    if (queue.length > 60) { queue = queue.slice(-40); pos = Math.min(pos, queue.length - 1); }
     show(queue[pos]);
   }
 
   function draw() {
     if (!all.length) return;
-    const cam = all[Math.floor(Math.random() * all.length)];
-    let i = queue.findIndex(c => c.id === cam.id);
-    if (i < 0) { queue.push(cam); i = queue.length - 1; }
-    pos = i;
+    const recent = queue.slice(Math.max(0, pos - 4), pos + 5).map(c => c.id);
+    const cam = pick(recent);
+    queue.push(cam);
+    pos = queue.length - 1;
     show(cam);
     renderThumbs();
   }
