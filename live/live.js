@@ -9,6 +9,20 @@
   const elImg = $("#view"), elName = $("#name"), elArea = $("#area"),
         elClock = $("#clock"), elIdx = $("#idx"), elBadge = $("#badge");
 
+  /* The stage gets an explicit pixel size so its height is definite; the live
+     frame then fills whatever the fixed rows leave, and nothing can be pushed
+     off-frame. Wide viewports get a 4:5 card (capped at 480px); portrait
+     viewports use the whole area. */
+  function layout() {
+    const vw = window.innerWidth, vh = window.innerHeight, AR = 4 / 5;
+    const st = $("#stage");
+    if (vw / Math.max(1, vh) > AR) { st.style.width = Math.min(480, Math.round(vh * AR)) + "px"; st.style.height = vh + "px"; }
+    else { st.style.width = vw + "px"; st.style.height = vh + "px"; }
+  }
+  layout();
+  window.addEventListener("resize", layout);
+  window.addEventListener("orientationchange", layout);
+
   let all = [], queue = [], pos = 0, paused = false, timer = null;
 
   const clockFmt = new Intl.DateTimeFormat("en-US",

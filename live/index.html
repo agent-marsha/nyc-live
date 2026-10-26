@@ -12,9 +12,9 @@
     font-family:ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
     -webkit-user-select:none; user-select:none; -webkit-tap-highlight-color:transparent; }
   body{ display:flex; align-items:center; justify-content:center; }
-  #stage{ position:relative; width:100%; max-width:480px; max-height:100%; aspect-ratio:4/5;
-    background:var(--ink); display:flex; flex-direction:column; overflow:hidden; }
-  @media (max-aspect-ratio:4/5){ #stage{ height:100%; aspect-ratio:auto; max-width:none; } }
+  /* sized in JS (layout() in live.js) so the height is DEFINITE — otherwise a
+     max-height-clamped column flex box keeps its content height and overflows */
+  #stage{ position:relative; display:flex; flex-direction:column; overflow:hidden; background:var(--ink); }
   .mono{ font-variant-numeric:tabular-nums; font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace; }
 
   header{ display:flex; align-items:center; gap:8px; padding:9px 12px 8px; border-bottom:1px solid var(--line); flex:0 0 auto; }
