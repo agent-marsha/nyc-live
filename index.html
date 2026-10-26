@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#0B0E12">
+<title>NYC LIVE — 975 traffic cameras, streaming in real time</title>
+<meta name="description" content="Live views from the NYC DOT traffic camera network. 975 cameras across all five boroughs, refreshing continuously.">
+
+<!-- ===================================================================
+     X / Twitter PLAYER CARD tags.
+     Post THIS page's URL on X. X shows a play-button thumbnail and loads
+     twitter:player in a frame inside the post, so the live view runs in
+     the timeline.
+     =================================================================== -->
+<meta name="twitter:card" content="player">
+<meta name="twitter:title" content="NYC LIVE">
+<meta name="twitter:description" content="Live views from 975 New York City traffic cameras, refreshing in real time.">
+<meta name="twitter:image" content="https://agent-marsha.github.io/nyc-live/preview.jpg">
+<meta name="twitter:image:alt" content="NYC LIVE — live traffic camera network">
+<meta name="twitter:player" content="https://agent-marsha.github.io/nyc-live/live/">
+<meta name="twitter:player:width" content="480">
+<meta name="twitter:player:height" content="600">
+
+<meta property="og:type" content="website">
+<meta property="og:title" content="NYC LIVE">
+<meta property="og:description" content="Live views from 975 New York City traffic cameras, refreshing in real time.">
+<meta property="og:image" content="https://agent-marsha.github.io/nyc-live/preview.jpg">
+<meta property="og:url" content="https://agent-marsha.github.io/nyc-live/">
+
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <h1>NYC <span style="color:var(--accent)">LIVE</span></h1>
+    <span class="sub"><span class="livedot"></span> NYC DOT traffic camera network &nbsp;·&nbsp; <span id="total" class="mono">—</span> cameras</span>
+    <span class="stat mono" id="clock">—</span>
+  </header>
+
+  <div class="controls">
+    <input id="q" type="search" placeholder="Search a camera or borough…" aria-label="Search cameras">
+    <button class="chip" data-area="All" aria-pressed="true">All</button>
+    <button class="chip" data-area="Manhattan" aria-pressed="false">Manhattan</button>
+    <button class="chip" data-area="Brooklyn" aria-pressed="false">Brooklyn</button>
+    <button class="chip" data-area="Queens" aria-pressed="false">Queens</button>
+    <button class="chip" data-area="Bronx" aria-pressed="false">Bronx</button>
+    <button class="chip" data-area="Staten Island" aria-pressed="false">Staten Island</button>
+    <button class="btn" id="shuffle">Shuffle</button>
+    <select id="rate" aria-label="Refresh rate">
+      <option value="1000">refresh 1s</option>
+      <option value="2500" selected>refresh 2.5s</option>
+      <option value="5000">refresh 5s</option>
+    </select>
+    <button class="btn" id="pause">Pause</button>
+    <span class="stat" id="count">—</span>
+  </div>
+
+  <section class="hero">
+    <div class="view"><img id="hero-img" alt="Live camera view"></div>
+    <div class="meta">
+      <span class="badge" id="hero-badge"><span class="livedot"></span>LIVE</span>
+      <h2 id="hero-name">Loading…</h2>
+      <div class="row" id="hero-meta"></div>
+    </div>
+  </section>
+
+  <div class="grid" id="grid"></div>
+  <button class="btn" id="more" hidden style="margin-top:14px">Show more</button>
+
+  <footer>
+    <b>NYC LIVE</b> — streaming the public camera network published by the <b>New York City
+    Department of Transportation</b> Traffic Management Center (<span class="mono">webcams.nyctmc.org</span>).
+    Images are the DOT's live still frames, refreshed continuously; the camera list is cached at build time.<br>
+    A Human–Technology Interaction Lab (HTIL) prototype · The University of Alabama.
+    <div class="note">
+      <b>Use note:</b> NYC DOT asks developers who consume the camera feed to sign a data-sharing
+      agreement (<span class="mono">TMCDOT@dot.nyc.gov</span>). This page is a technical demonstration;
+      sign the agreement before any production or high-volume use.
+    </div>
+  </footer>
+</div>
+<script src="app.js"></script>
+</body>
+</html>
