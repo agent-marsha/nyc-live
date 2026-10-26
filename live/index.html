@@ -17,7 +17,7 @@
   @media (max-aspect-ratio:4/5){ #stage{ height:100%; aspect-ratio:auto; max-width:none; } }
   .mono{ font-variant-numeric:tabular-nums; font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace; }
 
-  header{ display:flex; align-items:center; gap:8px; padding:9px 12px 8px; border-bottom:1px solid var(--line); }
+  header{ display:flex; align-items:center; gap:8px; padding:9px 12px 8px; border-bottom:1px solid var(--line); flex:0 0 auto; }
   header h1{ font-size:13px; letter-spacing:.16em; margin:0; font-weight:800; }
   header .sp{ margin-left:auto; color:var(--dim); font-size:11.5px; }
   .livedot{ display:inline-block; width:7px; height:7px; border-radius:50%; background:var(--live); }
@@ -25,23 +25,23 @@
     color:var(--fg); background:#0E1218; border:1px solid var(--line); border-radius:999px; padding:3px 9px; }
   .badge.off{ color:var(--dim); }
 
-  /* the live frame absorbs whatever height is left, cropping instead of overflowing */
-  #stage .viewwrap{ position:relative; background:#05070A; flex:0 1 auto; min-height:0; overflow:hidden;
-    aspect-ratio:352/240; }
+  /* the live frame takes all the height the fixed rows don't need — it crops
+     rather than overflowing, so the control bar is always visible */
+  #stage .viewwrap{ position:relative; background:#05070A; flex:1 1 auto; min-height:0; overflow:hidden; }
   #view{ width:100%; height:100%; display:block; object-fit:cover; }
 
-  .info{ padding:11px 13px 6px; }
+  .info{ padding:11px 13px 6px; flex:0 0 auto; }
   .info h2{ font-size:15.5px; margin:0 0 5px; line-height:1.35; }
   .info .row{ color:var(--dim); font-size:11.5px; letter-spacing:.04em; display:flex; gap:10px; flex-wrap:wrap; }
 
-  .thumbs{ display:grid; grid-template-columns:repeat(3,1fr); gap:6px; padding:8px 13px 10px; }
-  @media (max-height:560px){ .thumbs{ display:none; } }
+  .thumbs{ display:grid; grid-template-columns:repeat(3,1fr); gap:6px; padding:8px 13px 10px; flex:0 0 auto; }
+  @media (max-height:520px){ .thumbs{ display:none; } }
   .thumbs button{ padding:0; border:1px solid var(--line); background:var(--panel); border-radius:7px;
     overflow:hidden; cursor:pointer; color:var(--dim); }
-  .thumbs img{ width:100%; display:block; aspect-ratio:352/240; object-fit:cover; }
+  .thumbs img{ width:100%; height:52px; display:block; object-fit:cover; }
   .thumbs span{ display:block; font-size:9px; padding:3px 5px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
 
-  .bar{ margin-top:auto; display:flex; gap:7px; padding:9px 12px; border-top:1px solid var(--line); }
+  .bar{ margin-top:auto; display:flex; gap:7px; padding:9px 12px; border-top:1px solid var(--line); flex:0 0 auto; }
   .bar button{ flex:1; background:var(--panel); border:1px solid var(--line); color:var(--fg);
     border-radius:9px; padding:9px 0; font-size:12px; cursor:pointer; font-weight:600; }
   .bar button:hover{ border-color:#2C3541; }
